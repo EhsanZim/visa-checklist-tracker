@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visa Document Checklist Tracker</title>
+  <!-- No external data file needed — all checklist data is embedded in app.js -->
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">✈</span>
+        <div>
+          <div class="logo-title">Visa Doc Tracker</div>
+          <div class="logo-sub">Immigration Checklist Manager</div>
+        </div>
+      </div>
+      <button class="btn-print" onclick="printChecklist()">⎙ Print Checklist</button>
+    </div>
+  </header>
+
+  <!-- CONTROLS -->
+  <section class="controls">
+    <div class="controls-inner">
+
+      <div class="client-row">
+        <div class="field-group">
+          <label for="clientName">Client Name</label>
+          <input type="text" id="clientName" placeholder="e.g. Mohammed Rahman" oninput="saveState()" />
+        </div>
+        <div class="field-group">
+          <label for="clientRef">Reference No.</label>
+          <input type="text" id="clientRef" placeholder="e.g. REF-2024-001" oninput="saveState()" />
+        </div>
+        <div class="field-group">
+          <label for="appDate">Application Date</label>
+          <input type="date" id="appDate" oninput="saveState()" />
+        </div>
+      </div>
+
+      <div class="select-row">
+        <div class="field-group">
+          <label for="countrySelect">Destination Country</label>
+          <select id="countrySelect" onchange="onCountryChange()">
+            <option value="">-- Select Country --</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label for="visaTypeSelect">Visa Type</label>
+          <select id="visaTypeSelect" onchange="renderChecklist()" disabled>
+            <option value="">-- Select Visa Type --</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PROGRESS BAR -->
+  <div class="progress-wrap" id="progressWrap" style="display:none;">
+    <div class="progress-inner">
+      <div class="progress-info">
+        <span id="progressText">0 of 0 documents ready</span>
+        <span id="progressPct">0%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHECKLIST OUTPUT -->
+  <main class="main" id="checklistContainer">
+    <div class="empty-state">
+      <div class="empty-icon">📋</div>
+      <p>Select a country and visa type to generate the document checklist</p>
+    </div>
+  </main>
+
+  <!-- RESET BUTTON -->
+  <div class="footer-actions" id="footerActions" style="display:none;">
+    <button class="btn-reset" onclick="resetChecklist()">↺ Reset Checklist</button>
+    <button class="btn-export" onclick="exportSummary()">⬇ Export Summary</button>
+  </div>
+
+  <footer class="footer">
+    <p>Visa Document Checklist Tracker &mdash; Immigration Document Manager</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
